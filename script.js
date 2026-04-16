@@ -12,14 +12,49 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
     setInterval(movePetRandomly, 5000);
 }); 
     // Add a variable "pet_info" equal to a object with the name (string), weight (number), and happiness (number) of your pet
-    var pet_info = {name:"My Pet Name", weight:"??", happiness:"??", iq:"??"};
+    var pet_info = {name:"My Pet Name", weight:"??", happiness:"??", iq:"??", stage: 1};
 
     //Flag to prevent multiple throws at once
     let animation = false; 
 
+
+    //Display Mood in Activity Logs
+    function getMoodComment() {
+      if (pet_info.happiness > 80) return "is beaming with joy!";
+      if (pet_info.happiness < 30) return "looks a bit tired...";
+      if (pet_info.weight > 80) return "is feeling very full!";
+      return "is doing great!";
+    }
+
+    //Evolve Pokemone based on stats
+    function checkEvolution() {
+      // Evolve to Stage 1
+      if (pet_info.iq >= 50 && pet_info.happiness >= 50 && pet_info.weight >= 10 && pet_info.stage === 1 ) {
+        pet_info.stage = 2;
+        $('.pet-image').fadeOut(1000, function() {
+          // Change the image source to Grotle
+          $(this).attr('src', '/images/Grotle.jpg').fadeIn(1000);
+          addStatusUpdate(`What?! ${pet_info.name} is evolving!`);
+          addStatusUpdate(`Congratulations! It evolved into GROTLE!`);
+        });
+      }
+      // Evolve to Stage 2
+      if(pet_info.iq >= 70 && pet_info.happiness >= 70 && pet_info.weight >= 30 && pet_info.stage === 2 ) {
+        pet_info.stage = 3;
+        $('.pet-image').fadeOut(1000, function() {
+          // Change the image source to Tortera
+          $(this).attr('src', '/images/Torterra.png').fadeIn(1000);
+          addStatusUpdate(`What?! ${pet_info.name} is evolving!`);
+          addStatusUpdate(`Congratulations! It evolved into TORTERRA!`);
+        });
+      }
+    }
+
     // Function to toggle the visibility of the popup and dim the status log
     function togglePopup() {
       const overlay = document.getElementById('popupOverlay');
+
+      // Toggle the 'log-dimmed' class on the status container to dim it when the popup is active
       $('.status-container').toggleClass('log-dimmed');
       overlay.classList.toggle('show');
     }
@@ -34,27 +69,36 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
         return;
       }
 
+      //Set current pet_info name to value of input
       pet_info.name = val;
+      
       createPetInfo();
       updatePetInfoInHtml();
-      togglePopup(); // Close after submit
+
+      // Close after submit
+      togglePopup(); 
     }
 
     // Function to handle throwing the Pokéball
     function throwPokeball() {
-      if (animation) return; // Prevent multiple throws at once
+      // If an animation is already in progress, do not allow another throw
+      if (animation) return; 
+
       animation = true;
+
       const ball = $('#pokeball');
       const pet = $('.pet-image');
 
       // If the pet's name is still the default, trigger the catch sequence
       if(pet_info.name === "My Pet Name") {
+
         //Toggle Shake Animation and add status update
         ball.toggleClass('shake');
         addStatusUpdate("You threw a Pokéball!");
 
         //After the shake (1.5s), catch the pet
         setTimeout(() => {
+          //Toggle classes to show the pet is caught and add status update
           ball.toggleClass('shake');
           ball.toggleClass('caught');
           pet.toggleClass('caught-pet');
@@ -71,18 +115,22 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
           animation = false; 
         }, 1500);
       }
+      // If the pet is already caught, toggle back to release it
       else {
         ball.toggleClass('caught');
         pet.toggleClass('caught-pet');
 
+        // Add status update based on whether the pet is being released or caught again
         if(ball.hasClass('caught')) {
           addStatusUpdate(`Come back! ${pet_info.name}!`);
         } else {
           addStatusUpdate(`Go! ${pet_info.name}!`);
         }
 
-        pet.css('transform', 'scaleX(1.2)'); // Face right by default when released
+        // Face right by default when released
+        pet.css('transform', 'scaleX(1.2)'); 
         setTimeout(() => {
+          // Reset pet scale and animation flag after release
           animation = false;
           pet.css('transform', 'scaleX(1)');
         }, 500);
@@ -90,6 +138,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
     }
 
  
+    // Function to move the pet to a random position within the container every 5 seconds
     function movePetRandomly() {
       const container = $('.pet-image-container');
       const pet = $('.pet-image');
@@ -103,6 +152,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       const randomTop = Math.floor(Math.random() * (containerHeight/2 - petHeight) + containerHeight/2);
       const randomLeft = Math.floor(Math.random() * (containerWidth - petWidth));
 
+      // Flip the pet to face the direction it's moving
       if(randomLeft < pet.position().left) {
         pet.css('transform', 'scaleX(1)'); // Face right
       } else {
@@ -116,12 +166,14 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       });
     }
 
+    //Create new pet info w/ random weight, happiness, and iq when name is submitted
     function createPetInfo() {
       pet_info.happiness = Math.floor(Math.random() * (100 - 0)) + 0;
       pet_info.weight = Math.floor(Math.random() * (100 - 0)) + 0;
       pet_info.iq = Math.floor(Math.random() * (100 - 0)) + 0;
     }
 
+    // Treat button increases happiness and weight
     function clickedTreatButton() {
       pet_info.happiness++;
       pet_info.weight++;
@@ -129,6 +181,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       checkAndUpdatePetInfoInHtml();
     }
     
+    // Play button increases happiness and decreases weight
     function clickedPlayButton() {
       pet_info.happiness++;
       pet_info.weight--;
@@ -136,6 +189,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       checkAndUpdatePetInfoInHtml();
     }
     
+    // Exercise button decreases happiness and weight
     function clickedExerciseButton() {
       pet_info.happiness--;
       pet_info.weight--;
@@ -143,6 +197,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       checkAndUpdatePetInfoInHtml();
     }
 
+    // Doom Scroll button decreases iq and increases happiness
     function clickedDoomScrollButton() {
       pet_info.iq--;
       pet_info.happiness++;
@@ -150,6 +205,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       checkAndUpdatePetInfoInHtml();
     }
 
+    // Study button increases iq and decreases happiness
     function clickedStudy() {
       pet_info.iq++;
       pet_info.happiness--;
@@ -157,13 +213,17 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       checkAndUpdatePetInfoInHtml();
     }
 
+    // Function to add a new status update to the top of the status log
     function addStatusUpdate(message) {
       // Prepend (add to the top) a new paragraph with the message to the status log
       $('#status-log').prepend(`<p> > ${message}</p>`);
     }
   
+    // Function to check weight and happiness values before updating the HTML to ensure they do not go below 0, then update the HTML with the current pet info
     function checkAndUpdatePetInfoInHtml() {
       checkWeightAndHappinessBeforeUpdating();
+      addStatusUpdate(`${pet_info.name} ${getMoodComment()}`);
+      checkEvolution();
       updatePetInfoInHtml();
     }
     

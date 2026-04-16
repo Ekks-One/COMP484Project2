@@ -18,9 +18,12 @@
     </header>
 
     <main>
+      <!-- Pet Image Container -->
       <section class="pet-image-container">
+
+        <!-- Background Image -->
         <div style="background-image: url('/images/background.jpg')">
-         <!-- Replace pet image with your own pet image -->
+          <!-- Pet Image -->
           <img class="pet-image" src="/images/TurtwigWalk.png">
         </div>
       </section>
@@ -37,6 +40,7 @@
         </div>
       </div>
 
+      <!-- Main Controls -->
       <div class="main-controls">
         <section class="dashboard hidden">
           <div>Name: <strong><span class="name"></span></strong></div>
@@ -44,31 +48,43 @@
           <div>Happiness: <strong><span class="happiness"></span> tail wags (per min)</strong></div>
           <div>IQ: <strong><span class="iq"></span></strong></div>
           <div class="button-container">
+            <!-- Treat Button -->
             <button class="treat-button">
               Treat
             </button>
+
+            <!-- Play Button -->
             <button class="play-button">
               Play
             </button>
+
+            <!-- Exercise Button -->
             <button class="exercise-button">
               Exercise
             </button>
+
+            <!-- Study Button -->
             <button class="study-button">
               Study
             </button>
+
+            <!-- Doom Scroll Button -->
             <button class="doom-scroll-button">
               Doom Scroll
             </button>
+
           </div>
         </section>
 
-        <!-- Trigger Button -->
+        <!--Pokeball -->
         <button id="pokeball" onclick="throwPokeball()"></button>
 
+        <!-- Status Log -->
         <div class="status-container">
           <h3>Activity Log</h3>
           <div id="status-log"></div>
         </div>
+
       </div>
     </main>
 
