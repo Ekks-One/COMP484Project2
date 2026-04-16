@@ -23,6 +23,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       if (pet_info.happiness > 80) return "is beaming with joy!";
       if (pet_info.happiness < 30) return "looks a bit tired...";
       if (pet_info.weight > 80) return "is feeling very full!";
+      if (pet_info.iq < 30) return "needs brainpower"
       return "is doing great!";
     }
 
@@ -179,6 +180,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       pet_info.happiness++;
       pet_info.weight++;
       addStatusUpdate(`${pet_info.name} ate a snack!`);
+      addStatusUpdate(`${pet_info.name} ${getMoodComment()}`);
       checkAndUpdatePetInfoInHtml();
     }
     
@@ -187,6 +189,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       pet_info.happiness++;
       pet_info.weight--;
       addStatusUpdate(`${pet_info.name} played their favorite game!`);
+      addStatusUpdate(`${pet_info.name} ${getMoodComment()}`);
       checkAndUpdatePetInfoInHtml();
     }
     
@@ -195,6 +198,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       pet_info.happiness--;
       pet_info.weight--;
       addStatusUpdate(`${pet_info.name} trained hard!`);
+      addStatusUpdate(`${pet_info.name} ${getMoodComment()}`);
       checkAndUpdatePetInfoInHtml();
     }
 
@@ -203,6 +207,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       pet_info.iq--;
       pet_info.happiness++;
       addStatusUpdate(`${pet_info.name} doom scrolled on social media!`);
+      addStatusUpdate(`${pet_info.name} ${getMoodComment()}`);
       checkAndUpdatePetInfoInHtml();
     }
 
@@ -211,6 +216,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       pet_info.iq++;
       pet_info.happiness--;
       addStatusUpdate(`${pet_info.name} studied hard!`);
+      addStatusUpdate(`${pet_info.name} ${getMoodComment()}`);
       checkAndUpdatePetInfoInHtml();
     }
 
@@ -225,9 +231,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       checkWeightAndHappinessBeforeUpdating();
       checkEvolution();
       updatePetInfoInHtml();
-      if(pet_info.name != "My Pet Name") {
-        addStatusUpdate(`${pet_info.name} ${getMoodComment()}`);
-      } else {
+      if(pet_info.name === "My Pet Name") {
         addStatusUpdate(`Catch the wild Pokemon`);
       }
     }
