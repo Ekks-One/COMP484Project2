@@ -14,15 +14,21 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
     // Add a variable "pet_info" equal to a object with the name (string), weight (number), and happiness (number) of your pet
     var pet_info = {name:"My Pet Name", weight:"??", happiness:"??", iq:"??"};
 
+    //Flag to prevent multiple throws at once
+    let animation = false; 
+
+    // Function to toggle the visibility of the popup and dim the status log
     function togglePopup() {
       const overlay = document.getElementById('popupOverlay');
       $('.status-container').toggleClass('log-dimmed');
       overlay.classList.toggle('show');
     }
 
+    // Function to handle the submission of the pet's name from the popup
     function submitInput() {
       const val = document.getElementById('myInput').value;
 
+      //Create error message if the input is empty and prevent submission
       if(val.trim() === "") {
         document.getElementById('nameError').textContent = "Please enter a name for your pet.";
         return;
@@ -34,10 +40,14 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       togglePopup(); // Close after submit
     }
 
+    // Function to handle throwing the Pokéball
     function throwPokeball() {
+      if (animation) return; // Prevent multiple throws at once
+      animation = true;
       const ball = $('#pokeball');
       const pet = $('.pet-image');
 
+      // If the pet's name is still the default, trigger the catch sequence
       if(pet_info.name === "My Pet Name") {
         //Toggle Shake Animation and add status update
         ball.toggleClass('shake');
@@ -51,13 +61,14 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
           
           addStatusUpdate("Gotcha! Turtwig was caught!");
 
-          
+          //Show the dashboard after the catch is confirmed
           $('.dashboard').removeClass('hidden');
-          //Show the naming popup after the catch is confirmed
+
           setTimeout(() => {
             togglePopup(); 
           }, 500);
-          
+          // Reset animation flag after the entire sequence is done
+          animation = false; 
         }, 1500);
       }
       else {
@@ -71,7 +82,10 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
         }
 
         pet.css('transform', 'scaleX(1.2)'); // Face right by default when released
-        setTimeout(() => pet.css('transform', 'scaleX(1)'), 500); // Reset to normal size after a brief moment  
+        setTimeout(() => {
+          animation = false;
+          pet.css('transform', 'scaleX(1)');
+        }, 500);
       }
     }
 
@@ -154,6 +168,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
     }
     
     function checkWeightAndHappinessBeforeUpdating() {
+      // Ensure weight, happiness, and iq do not go below 0
       if (pet_info.weight < 0) {
         pet_info.weight = 0;
       }

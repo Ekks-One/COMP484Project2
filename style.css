@@ -62,8 +62,10 @@
   
   .pet-image {
     height: 250px;
-    position: absolute; /* Required for top/left movement */
-    transition: all 1s ease-in-out; /* Makes the movement smooth */
+    /* Required for top/left movement */
+    position: absolute;
+    /* Makes the movement smooth */
+    transition: all 1s ease-in-out;
   }
   
   .dashboard div {
@@ -73,14 +75,14 @@
   .pet-image-container {
     /* Acts as the boundary for the pet */
     position: relative;
-    height: 500px;
+    height: 700px;
     width: 100%;
     overflow: hidden;
 
     background-image: url('/images/background.jpg');
-    background-position: center; /* Keeps the focus in the middle */
+    background-position: center;
     background-repeat: no-repeat;
-    background-size: cover; /* Forces image to cover the entire area */
+    background-size: cover;
     border-color: black;
     border-width: 6px;
     border-style: solid;
@@ -88,9 +90,9 @@
 
   .main-controls {
     display: flex;
-    justify-content: center; /* Centers items horizontally */
-    align-items: center;     /* Aligns items vertically */
-    gap: 50px;              /* Space between dashboard, ball, and log */
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
     margin-top: 30px;
     width: 100%;
   }
@@ -103,21 +105,25 @@
   .button-container {
     margin-top:20px;
   }
+
+  /* Utility class to hide elements when needed */
   .hidden {
     display: none !important;
   }
 
   .button-container button {
-    width: 100px;
-    margin-right: 10px;
-    text-align: center;
-    display: inline-block;
-    font-size:15px;
-    background-color: #1e2835;
-    border-color: #404853;
-    cursor:pointer;
-    background-image: linear-gradient(to bottom,rgba(246,246,246,.1)0%,rgba(30,40,53,0)66%);
-    color: #fafafa;
+    width: 120px;
+    padding: 10px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: white;
+    background-color: #30b424;
+    border: 4px solid #18800f;
+    border-radius: 50px; 
+    box-shadow: inset -4px -4px 0px 0px #0d5007;
+    transition: all 0.1s active;
   }
 
   #pokeball {
@@ -160,7 +166,7 @@
   .dashboard-controls {
     display: flex;
     align-items: flex-start; 
-    gap: 30px;            /* Space between buttons and log */
+    gap: 30px;      
     margin-top: 20px;
   }
 
@@ -172,12 +178,11 @@
     width: 120px; 
   }
 
-
   .status-container {
     position: relative;
     top: auto;
     left: auto;
-    width: 300px;
+    width: 400px;
     background: #f4f4f4;
     padding: 10px;
     border-radius: 5px;
@@ -187,6 +192,7 @@
     transition: opacity 0.4s ease, filter 0.4s ease;
   }
 
+  /* Class to dim the log when the pet is caught */
   .log-dimmed {
     opacity: 0.3 !important; 
     filter: blur(1px);
