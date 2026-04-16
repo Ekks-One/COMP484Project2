@@ -71,11 +71,16 @@
   }
   
   .pet-image-container {
-    position: relative; /* Acts as the boundary for the pet */
-    height: 600px;
-    width: 100%;        /* Give it space to move */
-    overflow: hidden;   /* Prevents the pet from walking off the page */
-    background: url(/images/background.jpg) center center / cover no-repeat; /* Optional: adds a background */
+    /* Acts as the boundary for the pet */
+    position: relative;
+    height: 500px;
+    width: 100%;
+    overflow: hidden;
+    background: url(/images/background.jpg) center center / cover no-repeat;
+    border-color: black;
+    border-width: 6px;
+    border-style: solid;
+
   }
   
   .dashboard {
@@ -113,7 +118,8 @@
 
   /* Pokéball shake animation */
   .shake {
-    animation: wobble 0.5s ease 3; /* Shakes 3 times like the game */
+     /* Shakes 3 times like the game */
+    animation: wobble 0.5s ease 3;
   }
 
   /* Keyframes for the wobble animation */
@@ -147,20 +153,18 @@
 
   .button-container {
     display: flex;
-    flex-direction: column; /* Stacks buttons vertically */
+    /* Stacks buttons vertically */
+    flex-direction: column;
     gap: 10px;
-    width: 120px;         /* Keeps button column consistent */
+    width: 120px; 
   }
 
-  /* Remove the old float from your existing button CSS */
-  .button-container button {
-    width: 100%;          /* Buttons fill the 120px width */
-    margin-right: 0;      /* Reset previous margins */
-    float: none;          /* Important: disable the float */
-  }
 
   .status-container {
-    
+    position: absolute;
+    top: 700px;
+    left: 500px;
+    width: 300px;
     background: #f4f4f4;
     padding: 10px;
     border-radius: 5px;
