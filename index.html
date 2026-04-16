@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <div>
     <header>
       <h1>
         PokePet Trainer
@@ -31,7 +32,7 @@
       <!-- Popup -->
       <div id="popupOverlay" class="overlay">
         <div class="popup-box">
-          <h1>Enter Name</h1>
+          <h2>Enter Name</h2>
           <div id="nameError" class="error"></div>
           <input type="text" id="myInput" placeholder="Name your Pokemon">
           <div class="buttons">
@@ -43,11 +44,13 @@
       <!-- Main Controls -->
       <div class="main-controls">
         <section class="dashboard hidden">
+          <div style="font-size: 50px">Pet Info</div>
           <div>Name: <strong><span class="name"></span></strong></div>
           <div>Weight: <strong><span class="weight"></span> pounds</strong></div>
           <div>Happiness: <strong><span class="happiness"></span> tail wags (per min)</strong></div>
           <div>IQ: <strong><span class="iq"></span></strong></div>
-          <div class="button-container">
+        </section>
+        <div class="button-container">
             <!-- Treat Button -->
             <button class="treat-button">
               Treat
@@ -74,7 +77,6 @@
             </button>
 
           </div>
-        </section>
 
         <!--Pokeball -->
         <button id="pokeball" onclick="throwPokeball()"></button>

@@ -4,8 +4,15 @@
   }
 
   @font-face {
-    font-family: 'PokemonFont';
+    font-family: 'PokemonHollow';
     src: url('./fonts/Pokemon\ Hollow.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'PokemonSolid';
+    src: url('./fonts/Pokemon\ Solid.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
   }
@@ -13,14 +20,37 @@
   body {
     font-family: helvetica, arial, sans-serif;
     margin: 25px;
+    background-image: url(./images/siteBackground.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
   }
+  
 
   h1 {
-    font-family: 'PokemonFont', cursive;
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    font-family: 'PokemonSolid', cursive;
+    font-size: 3em;
+    text-align: center;
+    margin: 0 auto 20px auto;
+    padding: 10px 40px;
+    width: 50%;
+    border: 4px solid #000000;
+    border-radius: 50px; 
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    font-weight: bold;
+    color: #000;
+    font-family: 'PokemonSolid', cursive;
     font-size: 3em;
     text-align: center;
     margin: 0;
-    width: 100%;
+    margin-bottom: 20px;
   }
   
   main {
@@ -30,11 +60,6 @@
   
   header {
     border-bottom: 1px solid black;
-  }
-  
-  h1 {
-    font-weight: bold;
-    color: #000;
   }
   
   .bold {
@@ -89,17 +114,26 @@
   }
 
   .main-controls {
+    background-color: whitesmoke;
+    border: 4px solid #000000;
+    border-radius: 50px; 
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 50px;
-    margin-top: 30px;
-    width: 100%;
+    gap: 100px;
+    width: fit-content;
+    margin: 30px auto;
+    padding: 20px 50px;
   }
   
   .dashboard {
     float:none;
     padding:0;
+    margin: 10px;
+    background: white;
+    border-radius: 15px;
+    padding: 10px 20px; 
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
   }
   
   .button-container {
@@ -188,7 +222,8 @@
     border-radius: 5px;
     border: 1px solid #ccc;
     max-height: 200px;
-    overflow-y: auto;     /* Scroll if the log gets too long */
+    /* Scroll if the log gets too long */
+    overflow-y: auto;
     transition: opacity 0.4s ease, filter 0.4s ease;
   }
 
