@@ -79,7 +79,7 @@
     width: 100%;
     overflow: hidden;
 
-    background-image: url('images/background.jpg');
+    background-image: url('./images/background.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -129,7 +129,7 @@
   #pokeball {
     width: 150px;
     height: 150px;
-    background: url('images/pokeball.png') center center / contain no-repeat;
+    background: url('./images/pokeball.png') center center / contain no-repeat;
     cursor: pointer;
     border-color: transparent;
   }
