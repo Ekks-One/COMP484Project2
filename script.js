@@ -33,7 +33,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
         pet_info.stage = 2;
         $('.pet-image').fadeOut(1000, function() {
           // Change the image source to Grotle
-          $(this).attr('src', 'images/Grotle.jpg').fadeIn(1000);
+          $(this).attr('src', './images/Grotle.jpg').fadeIn(1000);
           addStatusUpdate(`What?! ${pet_info.name} is evolving!`);
           addStatusUpdate(`Congratulations! It evolved into GROTLE!`);
         });
@@ -43,7 +43,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
         pet_info.stage = 3;
         $('.pet-image').fadeOut(1000, function() {
           // Change the image source to Tortera
-          $(this).attr('src', 'images/Torterra.png').fadeIn(1000);
+          $(this).attr('src', './images/Torterra.png').fadeIn(1000);
           addStatusUpdate(`What?! ${pet_info.name} is evolving!`);
           addStatusUpdate(`Congratulations! It evolved into TORTERRA!`);
         });
