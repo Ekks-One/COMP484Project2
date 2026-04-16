@@ -33,7 +33,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
         pet_info.stage = 2;
         $('.pet-image').fadeOut(1000, function() {
           // Change the image source to Grotle
-          $(this).attr('src', '/images/Grotle.jpg').fadeIn(1000);
+          $(this).attr('src', 'images/Grotle.jpg').fadeIn(1000);
           addStatusUpdate(`What?! ${pet_info.name} is evolving!`);
           addStatusUpdate(`Congratulations! It evolved into GROTLE!`);
         });
@@ -43,7 +43,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
         pet_info.stage = 3;
         $('.pet-image').fadeOut(1000, function() {
           // Change the image source to Tortera
-          $(this).attr('src', '/images/Torterra.png').fadeIn(1000);
+          $(this).attr('src', 'images/Torterra.png').fadeIn(1000);
           addStatusUpdate(`What?! ${pet_info.name} is evolving!`);
           addStatusUpdate(`Congratulations! It evolved into TORTERRA!`);
         });
@@ -168,9 +168,9 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
 
     //Create new pet info w/ random weight, happiness, and iq when name is submitted
     function createPetInfo() {
-      pet_info.happiness = Math.floor(Math.random() * (100 - 0)) + 0;
-      pet_info.weight = Math.floor(Math.random() * (100 - 0)) + 0;
-      pet_info.iq = Math.floor(Math.random() * (100 - 0)) + 0;
+      pet_info.happiness = Math.floor(Math.random() * (50 - 0)) + 0;
+      pet_info.weight = Math.floor(Math.random() * (50 - 0)) + 0;
+      pet_info.iq = Math.floor(Math.random() * (50 - 0)) + 0;
     }
 
     // Treat button increases happiness and weight
