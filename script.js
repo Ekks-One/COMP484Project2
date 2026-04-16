@@ -107,6 +107,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
 
           //Show the dashboard after the catch is confirmed
           $('.dashboard').removeClass('hidden');
+          $('.buttons').removeClass('hidden');
 
           setTimeout(() => {
             togglePopup(); 
@@ -122,9 +123,9 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
 
         // Add status update based on whether the pet is being released or caught again
         if(ball.hasClass('caught')) {
-          addStatusUpdate(`Come back! ${pet_info.name}!`);
+          addStatusUpdate(`<b>Come back! ${pet_info.name}!`);
         } else {
-          addStatusUpdate(`Go! ${pet_info.name}!`);
+          addStatusUpdate(`<b>Go! ${pet_info.name}!`);
         }
 
         // Face right by default when released
@@ -216,7 +217,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
     // Function to add a new status update to the top of the status log
     function addStatusUpdate(message) {
       // Prepend (add to the top) a new paragraph with the message to the status log
-      $('#status-log').prepend(`<p> > ${message}</p>`);
+      $('#status-log').prepend(`<br/><p> > ${message}</p>`);
     }
   
     // Function to check weight and happiness values before updating the HTML to ensure they do not go below 0, then update the HTML with the current pet info
