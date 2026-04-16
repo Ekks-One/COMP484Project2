@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Your Giga Pet</title>
+    <title>Train Your Pokemon!</title>
     <meta name="description" content="A cool thing made with Glitch">
     <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
     <meta charset="utf-8">
@@ -13,19 +13,37 @@
   <body>
     <header>
       <h1>
-        This is your Giga Pet
+        PokePet Trainer
       </h1>
     </header>
 
     <main>
       <section class="pet-image-container">
+        <div style="background-image: url('/images/background.jpg')">
          <!-- Replace pet image with your own pet image -->
-        <img class="pet-image" src="">
+          <img class="pet-image" src="/images/TurtwigWalk.png">
+        </div>
       </section>
-      <section class="dashboard">
+
+      <!-- Trigger Button -->
+      <button id="pokeball" onclick="throwPokeball()"></button>
+
+      <!-- Popup -->
+      <div id="popupOverlay" class="overlay">
+        <div class="popup-box">
+          <h1>Enter Name</h1>
+          <input type="text" id="myInput" placeholder="Name your Pokemon">
+          <div class="buttons">
+            <button onclick="submitInput()">Submit</button>
+          </div>
+        </div>
+      </div>
+
+      <section class="dashboard hidden">
         <div>Name: <strong><span class="name"></span></strong></div>
         <div>Weight: <strong><span class="weight"></span> pounds</strong></div>
         <div>Happiness: <strong><span class="happiness"></span> tail wags (per min)</strong></div>
+        <div>IQ: <strong><span class="iq"></span></strong></div>
         <div class="button-container">
           <button class="treat-button">
             Treat
@@ -36,6 +54,13 @@
           <button class="exercise-button">
             Exercise
           </button>
+          <button class="doom-scroll-button">
+            Doom Scroll
+          </button>
+        </div>
+        <div class="status-container">
+          <h3>Activity Log</h3>
+          <div id="status-log"></div>
         </div>
       </section>
     </main>
@@ -43,6 +68,7 @@
     <!-- Your web-app is https, so your scripts need to be too -->
     <script src="https://code.jquery.com/jquery-2.2.1.min.js"
             integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
-            crossorigin="anonymous"></script>
+            crossorigin="anonymous">
+    </script>
   </body>
 </html>
