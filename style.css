@@ -226,3 +226,9 @@
   /* Class to show the popup */
   .show { display: flex; }
 
+  #nameError {
+    color: red;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+  }
+

@@ -22,10 +22,12 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
 
     function submitInput() {
       const val = document.getElementById('myInput').value;
+
       if(val.trim() === "") {
-        alert("Please enter a name for your pet.");
+        document.getElementById('nameError').textContent = "Please enter a name for your pet.";
         return;
       }
+
       pet_info.name = val;
       createPetInfo();
       updatePetInfoInHtml();
@@ -44,13 +46,14 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
         //After the shake (1.5s), catch the pet
         setTimeout(() => {
           ball.toggleClass('shake');
-          ball.toggleClass('caught'); // Turn gray/deactivated
-          pet.toggleClass('caught-pet'); // Turtwig disappears into the ball
+          ball.toggleClass('caught');
+          pet.toggleClass('caught-pet');
           
           addStatusUpdate("Gotcha! Turtwig was caught!");
 
+          
           $('.dashboard').removeClass('hidden');
-          // 3. Show the naming popup after the catch is confirmed
+          //Show the naming popup after the catch is confirmed
           setTimeout(() => {
             togglePopup(); 
           }, 500);
@@ -141,7 +144,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
     }
 
     function addStatusUpdate(message) {
-      // Use .prepend() to add the message to the top of the log
+      // Prepend (add to the top) a new paragraph with the message to the status log
       $('#status-log').prepend(`<p> > ${message}</p>`);
     }
   
