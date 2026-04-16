@@ -107,7 +107,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
 
           //Show the dashboard after the catch is confirmed
           $('.dashboard').removeClass('hidden');
-          $('.buttons').removeClass('hidden');
+          $('.button-container').removeClass('hidden');
 
           setTimeout(() => {
             togglePopup(); 
