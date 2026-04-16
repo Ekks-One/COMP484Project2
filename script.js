@@ -223,9 +223,13 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
     // Function to check weight and happiness values before updating the HTML to ensure they do not go below 0, then update the HTML with the current pet info
     function checkAndUpdatePetInfoInHtml() {
       checkWeightAndHappinessBeforeUpdating();
-      addStatusUpdate(`${pet_info.name} ${getMoodComment()}`);
       checkEvolution();
       updatePetInfoInHtml();
+      if(pet_info.name != "My Pet Name") {
+        addStatusUpdate(`${pet_info.name} ${getMoodComment()}`);
+      } else {
+        addStatusUpdate(`Catch the wild Pokemon`);
+      }
     }
     
     function checkWeightAndHappinessBeforeUpdating() {
