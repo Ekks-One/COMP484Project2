@@ -7,6 +7,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
     $('.treat-button').click(clickedTreatButton);
     $('.play-button').click(clickedPlayButton);
     $('.exercise-button').click(clickedExerciseButton);
+    $('.study-button').click(clickedStudy);
     $('.doom-scroll-button').click(clickedDoomScrollButton);
     setInterval(movePetRandomly, 5000);
 }); 
@@ -121,7 +122,6 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
     function clickedExerciseButton() {
       pet_info.happiness--;
       pet_info.weight--;
-      pet_info.iq++;
       addStatusUpdate(`${pet_info.name} trained hard!`);
       checkAndUpdatePetInfoInHtml();
     }
@@ -130,6 +130,13 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       pet_info.iq--;
       pet_info.happiness++;
       addStatusUpdate(`${pet_info.name} doom scrolled on social media!`);
+      checkAndUpdatePetInfoInHtml();
+    }
+
+    function clickedStudy() {
+      pet_info.iq++;
+      pet_info.happiness--;
+      addStatusUpdate(`${pet_info.name} studied hard!`);
       checkAndUpdatePetInfoInHtml();
     }
 
