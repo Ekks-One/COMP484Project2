@@ -9,22 +9,43 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
     $('.exercise-button').click(clickedExerciseButton);
     $('.study-button').click(clickedStudy);
     $('.doom-scroll-button').click(clickedDoomScrollButton);
+    $('.instructionOverlay').click(toggleInstructionsPopup);
     setInterval(movePetRandomly, 5000);
 }); 
     // Add a variable "pet_info" equal to a object with the name (string), weight (number), and happiness (number) of your pet
     var pet_info = {name:"My Pet Name", weight:"??", happiness:"??", iq:"??", stage: 1};
 
+    const bgMusic = document.getElementById("bgMusic");
+    const turtwigSound = document.getElementById("turtwigSound");
+    const grovyleSound = document.getElementById("grovyleSound");
+    const torterraSound = document.getElementById("torterraSound");
+
     //Flag to prevent multiple throws at once
     let animation = false; 
 
-
     //Display Mood in Activity Logs
-    function getMoodComment() {
-      if (pet_info.happiness > 80) return "is beaming with joy!";
-      if (pet_info.happiness < 30) return "looks a bit tired...";
-      if (pet_info.weight > 80) return "is feeling very full!";
-      if (pet_info.iq < 30) return "needs brainpower"
-      return "is doing great!";
+    function getMoodComment(action = "") {
+      const h = pet_info.happiness;
+      const w = pet_info.weight;
+      const iq = pet_info.iq;
+
+      if (h >= 85 && iq >= 70) return "is glowing with confidence!";
+      if (h >= 80) return "is zooming around with excitement!";
+      if (h <= 20) return "looks really upset...";
+      if (w <= 10) return "has a tiny stomach growl going on.";
+      if (w >= 80) return "looks extra round and sleepy.";
+      if (iq >= 85) return "looks like a genius right now.";
+      if (iq <= 20) return "has absolutely no thoughts right now.";
+      if (h <= 35 && iq >= 70) return "looks smart, but mentally exhausted.";
+      if (h >= 60 && w >= 50) return "looks cozy and content.";
+      
+      if (action === "play") return "is having the time of its life!";
+      if (action === "exercise") return "looks tired, but proud!";
+      if (action === "study") return "is locked in.";
+      if (action === "treat") return "looks very satisfied.";
+      if (action === "doomscroll") return "looks entertained but unfocused.";
+
+      return "is just vibing.";
     }
 
     //Evolve Pokemone based on stats
@@ -37,6 +58,10 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
           $(this).attr('src', './images/Grotle.jpg').fadeIn(1000);
           addStatusUpdate(`What?! ${pet_info.name} is evolving!`);
           addStatusUpdate(`Congratulations! It evolved into GROTLE!`);
+          if (grovyleSound.paused) {
+            grovyleSound.volume = 0.3;
+            grovyleSound.play();
+          }
         });
       }
       // Evolve to Stage 2
@@ -47,6 +72,10 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
           $(this).attr('src', './images/Torterra.png').fadeIn(1000);
           addStatusUpdate(`What?! ${pet_info.name} is evolving!`);
           addStatusUpdate(`Congratulations! It evolved into TORTERRA!`);
+          if (torterraSound.paused) {
+            torterraSound.volume = 0.3;
+            torterraSound.play();
+          }
         });
       }
     }
@@ -58,6 +87,18 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       // Toggle the 'log-dimmed' class on the status container to dim it when the popup is active
       $('.status-container').toggleClass('log-dimmed');
       overlay.classList.toggle('show');
+    }
+
+    function toggleInstructionsPopup() {
+      const overlay = document.getElementById('instructionOverlay');
+      $('.status-container').toggleClass('log-dimmed');
+      overlay.classList.toggle('show');
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            toggleInstructionsPopup();
+        }
+      });
+
     }
 
     // Function to handle the submission of the pet's name from the popup
@@ -82,11 +123,16 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
 
     // Function to handle throwing the Pokéball
     function throwPokeball() {
+      if (bgMusic.paused) {
+        bgMusic.volume = 0.3;
+        bgMusic.play();
+      }
       // If an animation is already in progress, do not allow another throw
       if (animation) return; 
 
       animation = true;
 
+      const sound = document.getElementById("pokeballSound");
       const ball = $('#pokeball');
       const pet = $('.pet-image');
 
@@ -95,6 +141,8 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
 
         //Toggle Shake Animation and add status update
         ball.toggleClass('shake');
+        sound.currentTime = 0; // restart sound if spam clicked
+        sound.play();
         addStatusUpdate("You threw a Pokéball!");
 
         //After the shake (1.5s), catch the pet
@@ -112,10 +160,10 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
 
           setTimeout(() => {
             togglePopup(); 
-          }, 500);
+          }, 1500);
           // Reset animation flag after the entire sequence is done
           animation = false; 
-        }, 1500);
+        }, 3500);
       }
       // If the pet is already caught, toggle back to release it
       else {
@@ -180,7 +228,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       pet_info.happiness++;
       pet_info.weight++;
       addStatusUpdate(`${pet_info.name} ate a snack!`);
-      addStatusUpdate(`${pet_info.name} ${getMoodComment()}`);
+      addStatusUpdate(`${pet_info.name} ${getMoodComment("treat")}`);
       checkAndUpdatePetInfoInHtml();
     }
     
@@ -189,7 +237,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       pet_info.happiness++;
       pet_info.weight--;
       addStatusUpdate(`${pet_info.name} played their favorite game!`);
-      addStatusUpdate(`${pet_info.name} ${getMoodComment()}`);
+      addStatusUpdate(`${pet_info.name} ${getMoodComment("play")}`);
       checkAndUpdatePetInfoInHtml();
     }
     
@@ -198,7 +246,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       pet_info.happiness--;
       pet_info.weight--;
       addStatusUpdate(`${pet_info.name} trained hard!`);
-      addStatusUpdate(`${pet_info.name} ${getMoodComment()}`);
+      addStatusUpdate(`${pet_info.name} ${getMoodComment("exercise")}`);
       checkAndUpdatePetInfoInHtml();
     }
 
@@ -207,7 +255,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       pet_info.iq--;
       pet_info.happiness++;
       addStatusUpdate(`${pet_info.name} doom scrolled on social media!`);
-      addStatusUpdate(`${pet_info.name} ${getMoodComment()}`);
+      addStatusUpdate(`${pet_info.name} ${getMoodComment("doomscroll")}`);
       checkAndUpdatePetInfoInHtml();
     }
 
@@ -216,7 +264,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       pet_info.iq++;
       pet_info.happiness--;
       addStatusUpdate(`${pet_info.name} studied hard!`);
-      addStatusUpdate(`${pet_info.name} ${getMoodComment()}`);
+      addStatusUpdate(`${pet_info.name} ${getMoodComment("study")}`);
       checkAndUpdatePetInfoInHtml();
     }
 
@@ -257,5 +305,6 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       $('.weight').text(pet_info['weight']);
       $('.happiness').text(pet_info['happiness']);
       $('.iq').text(pet_info['iq']);
+      $('.mood').text(getMoodComment());
     }
   
