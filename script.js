@@ -15,6 +15,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
 
     function togglePopup() {
       const overlay = document.getElementById('popupOverlay');
+      $('.status-container').toggleClass('log-dimmed');
       overlay.classList.toggle('show');
     }
 

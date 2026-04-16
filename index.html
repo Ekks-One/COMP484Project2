@@ -25,9 +25,6 @@
         </div>
       </section>
 
-      <!-- Trigger Button -->
-      <button id="pokeball" onclick="throwPokeball()"></button>
-
       <!-- Popup -->
       <div id="popupOverlay" class="overlay">
         <div class="popup-box">
@@ -39,29 +36,35 @@
         </div>
       </div>
 
-      <section class="dashboard hidden">
-        <div>Name: <strong><span class="name"></span></strong></div>
-        <div>Weight: <strong><span class="weight"></span> pounds</strong></div>
-        <div>Happiness: <strong><span class="happiness"></span> tail wags (per min)</strong></div>
-        <div>IQ: <strong><span class="iq"></span></strong></div>
-        <div class="button-container">
-          <button class="treat-button">
-            Treat
-          </button>
-          <button class="play-button">
-            Play
-          </button>
-          <button class="exercise-button">
-            Exercise
-          </button>
-          <button class="doom-scroll-button">
-            Doom Scroll
-          </button>
+      <div class="main-controls">
+        <section class="dashboard hidden">
+          <div>Name: <strong><span class="name"></span></strong></div>
+          <div>Weight: <strong><span class="weight"></span> pounds</strong></div>
+          <div>Happiness: <strong><span class="happiness"></span> tail wags (per min)</strong></div>
+          <div>IQ: <strong><span class="iq"></span></strong></div>
+          <div class="button-container">
+            <button class="treat-button">
+              Treat
+            </button>
+            <button class="play-button">
+              Play
+            </button>
+            <button class="exercise-button">
+              Exercise
+            </button>
+            <button class="doom-scroll-button">
+              Doom Scroll
+            </button>
+          </div>
+        </section>
+
+        <!-- Trigger Button -->
+        <button id="pokeball" onclick="throwPokeball()"></button>
+
+        <div class="status-container">
+          <h3>Activity Log</h3>
+          <div id="status-log"></div>
         </div>
-      </section>
-      <div class="status-container">
-        <h3>Activity Log</h3>
-        <div id="status-log"></div>
       </div>
     </main>
 
