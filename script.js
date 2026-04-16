@@ -136,6 +136,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       const ball = $('#pokeball');
       const pet = $('.pet-image');
 
+      //toggleClass used to turn on and off a class
       // If the pet's name is still the default, trigger the catch sequence
       if(pet_info.name === "My Pet Name") {
 
